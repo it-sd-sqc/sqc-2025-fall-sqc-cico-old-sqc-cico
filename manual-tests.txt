@@ -62,3 +62,31 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 * Should display "Developer" for the user name.
 
 
+# Module 4: Constrain card number length (Ticket 402)
+
+## Test steps
+1. Build and run CiCo
+2. Enter nine 0's (000000000) or more
+
+## Expected results
+* The field should only display 8 numbers
+
+# Module 5: Full program closure on close
+
+## Test steps
+1. Build and run CiCo
+2. Click the close button on the window.
+
+## Expected results
+* The program should close normally and if you opened the program from the command line it should say "Clean shutdown" in the command line.
+
+# Module 6: New color scheme
+
+## Test steps
+1. Build and run CiCo
+2. Enter 11111111
+3. Click "ok" button
+4. Enter 00000000
+
+## Expected results
+* The main panel (with the number entry) should be dark grey with white text, the error panel should display red with white text, and the status panel should display a green background with white text.
