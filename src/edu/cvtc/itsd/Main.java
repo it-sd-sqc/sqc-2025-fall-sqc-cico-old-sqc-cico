@@ -43,6 +43,9 @@ public class Main {
     {
       if (fb.getDocument() != null) {
         super.insertString(fb, offset, stringToAdd, attr);
+        if (fb.getDocument().getLength() == 8) {
+          Main.processCard();
+        }
       }
       else {
         Toolkit.getDefaultToolkit().beep();
@@ -55,6 +58,9 @@ public class Main {
     {
       if (fb.getDocument() != null) {
         super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
+        if (fb.getDocument().getLength() == 8) {
+          Main.processCard();
+        }
       }
       else {
         Toolkit.getDefaultToolkit().beep();
@@ -260,12 +266,6 @@ public class Main {
     fieldNumber.setForeground(Color.magenta);
     panelMain.add(fieldNumber);
 
-    JButton updateButton = new JButton("Update");
-    updateButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    updateButton.addActionListener(new Update());
-    updateButton.setForeground(Color.green);
-    panelMain.add(updateButton);
-
     panelMain.add(Box.createVerticalGlue());
 
     // Status panel ///////////////////////////////////////////////////////////
@@ -288,6 +288,13 @@ public class Main {
     labelState.setAlignmentX(JComponent.CENTER_ALIGNMENT);
     labelState.setForeground(Color.magenta);
     panelStatus.add(labelState);
+
+    JButton returnButton = new JButton("Return");
+    returnButton.addActionListener((l) -> {
+      doneProcessing();
+    });
+    returnButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+    panelStatus.add(returnButton);
 
     panelStatus.add(Box.createVerticalGlue());
 
