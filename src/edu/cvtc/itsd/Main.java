@@ -41,11 +41,10 @@ public class Main {
     public void insertString(FilterBypass fb, int offset, String stringToAdd, AttributeSet attr)
         throws BadLocationException
     {
-      if (fb.getDocument() != null) {
-        super.insertString(fb, offset, stringToAdd, attr);
-      }
-      else {
-        Toolkit.getDefaultToolkit().beep();
+      if (stringToAdd != null && stringToAdd.matches("\\d+")) {
+      super.insertString(fb, offset, stringToAdd, attr);
+      } else {
+      Toolkit.getDefaultToolkit().beep(); // invalid input feedback
       }
     }
 
@@ -53,11 +52,20 @@ public class Main {
     public void replace(FilterBypass fb, int offset, int lengthToDelete, String stringToAdd, AttributeSet attr)
         throws BadLocationException
     {
-      if (fb.getDocument() != null) {
+      if (stringToAdd != null && stringToAdd.matches("\\d+")) {
         super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
+      } else if (stringToAdd == null || stringToAdd.isEmpty()) {
+        // allow deletion
+        super.replace(fb, offset, lengthToDelete, stringToAdd, attr);
+      } else {
+        Toolkit.getDefaultToolkit().beep(); // invalid input feedback
       }
-      else {
-        Toolkit.getDefaultToolkit().beep();
+    }
+
+    private void digitsEntered(FilterBypass fb) throws BadLocationException {
+      String currentInput = fb.getDocument().getText(0, fb.getDocument().getLength());
+      if (currentInput.length() == MAX_LENGTH){
+        SwingUtilities.invokeLater(Main::processCard);
       }
     }
   }
@@ -260,13 +268,20 @@ public class Main {
     fieldNumber.setForeground(Color.magenta);
     panelMain.add(fieldNumber);
 
-    JButton updateButton = new JButton("Update");
-    updateButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    updateButton.addActionListener(new Update());
-    updateButton.setForeground(Color.green);
-    panelMain.add(updateButton);
+    //JButton updateButton = new JButton("Update");
+    //updateButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+    //updateButton.addActionListener(new Update());
+    //updateButton.setForeground(Color.green);
+    //panelMain.add(updateButton);
 
     panelMain.add(Box.createVerticalGlue());
+
+    // ===== Ticket 501: Add Next button =====
+    JButton nextButton = new JButton("Next");
+    nextButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+    nextButton.addActionListener(e -> skipTimeout());
+    nextButton.setForeground(Color.orange);
+    panelMain.add(nextButton);
 
     // Status panel ///////////////////////////////////////////////////////////
     JPanel panelStatus = new JPanel();
