@@ -69,3 +69,13 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 
 ## Expected results
 * abcd should not display in the field 
+
+# Module 5
+
+## Test steps
+1. Build and run CiCo
+2. Enter 00000000 into the field and click Update
+3. Click Exit
+
+## Expected results
+* Should sign user out
