@@ -278,6 +278,7 @@ public class Main {
     panelMain.add(Box.createVerticalGlue());
 
     // Status panel ///////////////////////////////////////////////////////////
+    // Module 5: Add exit button so that user doesn't have to wait for the timeout
     JPanel panelStatus = new JPanel();
     panelStatus.setLayout(new BoxLayout(panelStatus, BoxLayout.PAGE_AXIS));
     panelStatus.setMinimumSize(new Dimension(320, 240));
@@ -299,6 +300,11 @@ public class Main {
     panelStatus.add(labelState);
 
     panelStatus.add(Box.createVerticalGlue());
+
+    JButton exitButton = new JButton("Exit");
+    exitButton.addActionListener(handler);
+    exitButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
+    panelStatus.add(exitButton);
 
     // Error panel ////////////////////////////////////////////////////////////
     JPanel panelError = new JPanel();
