@@ -71,3 +71,10 @@ To reproduce:
 Expected result:
 The card field should ignore non-numerical characters.
 Nothing should appear in the field.
+
+Ticket 502 Manual Test
+
+1. Start the application.
+2. Close the main window using the X button.
+3. Verify the application completely exits.
+4. Confirm the program is no longer running in the terminal.
