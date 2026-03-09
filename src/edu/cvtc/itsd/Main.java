@@ -38,17 +38,24 @@ public class Main {
       private static final int MAX_LENGTH = 8;
 
       @Override
-      public void insertString(FilterBypass fb, int offset, String stringToAdd, AttributeSet attr)
-              throws BadLocationException
-      {
-          // Only allow digits and enforce max length
-          if (stringToAdd != null && stringToAdd.matches("\\d+")
-                  && fb.getDocument().getLength() + stringToAdd.length() <= MAX_LENGTH) {
-              super.insertString(fb, offset, stringToAdd, attr);
-          } else {
-              Toolkit.getDefaultToolkit().beep();
-          }
-      }
+public void insertString(FilterBypass fb, int offset, String stringToAdd, AttributeSet attr)
+        throws BadLocationException
+{
+    if (stringToAdd != null && stringToAdd.matches("\\d+")
+            && fb.getDocument().getLength() + stringToAdd.length() <= MAX_LENGTH) {
+
+        super.insertString(fb, offset, stringToAdd, attr);
+
+        String text = fb.getDocument().getText(0, fb.getDocument().getLength());
+
+        if (text.length() == MAX_LENGTH) {
+            Main.processCard();
+        }
+
+    } else {
+        Toolkit.getDefaultToolkit().beep();
+    }
+}
 
       @Override
       public void replace(FilterBypass fb, int offset, int lengthToDelete, String stringToAdd, AttributeSet attr)
@@ -263,11 +270,6 @@ public class Main {
     fieldNumber.setForeground(Color.magenta);
     panelMain.add(fieldNumber);
 
-    JButton updateButton = new JButton("Update");
-    updateButton.setAlignmentX(JComponent.CENTER_ALIGNMENT);
-    updateButton.addActionListener(new Update());
-    updateButton.setForeground(Color.green);
-    panelMain.add(updateButton);
 
     panelMain.add(Box.createVerticalGlue());
 
