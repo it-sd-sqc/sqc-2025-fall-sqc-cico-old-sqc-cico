@@ -78,3 +78,11 @@ Ticket 502 Manual Test
 2. Close the main window using the X button.
 3. Verify the application completely exits.
 4. Confirm the program is no longer running in the terminal.
+
+Ticket 601 - Auto-submit card number
+
+1. Run the CiCo program
+2. Enter a full card number
+3. Verify the system submits automatically without pressing Enter
+
+Expected Result: The card number is submitted automatically after the last digit is entered.
