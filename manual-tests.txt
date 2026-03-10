@@ -61,4 +61,16 @@ Use `./build.sh` to build CiCo and `./run.sh` to run it if using the command lin
 ## Expected results
 * Should display "Developer" for the user name.
 
+#Module 5: Ticket 502 - Clean shutdown
+
+## Test steps
+1. Build and run CiCo.
+2. Close the window using the X button.
+3. Verify the application fully exits.
+4. Confirm no Java process remains running in the shell.
+
+## Expected results
+* The application completely quits when the window is closed.
+* No lingering processes remain.
+
 
